@@ -17,8 +17,8 @@ export default function PriceChart({ history }: PriceChartProps) {
           <YAxis domain={[0, 20]} stroke="#aaa" />
           <Tooltip contentStyle={{ backgroundColor: "#1e1e20", borderColor: "#444", color: "#fff" }} />
           <Legend />
-          <Line type="monotone" dataKey="blue_team_price" stroke="#60a5fa" name="MAS Price" />
-          <Line type="monotone" dataKey="green_team_price" stroke="#34d399" name="Human Price" />
+          <Line type="monotone" dataKey="blue_team_price" stroke="#3b82f6" strokeWidth={3} dot={{ r: 2 }} name="MAS Price" />
+          <Line type="monotone" dataKey="green_team_price" stroke="#10b981" strokeWidth={2} dot={{ r: 2 }} name="Human Price" />
         </LineChart>
       </ResponsiveContainer>
     </div>

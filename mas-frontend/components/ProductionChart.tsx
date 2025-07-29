@@ -17,8 +17,8 @@ export default function ProductionChart({ history }: ProductionChartProps) {
           <YAxis stroke="#aaa" />
           <Tooltip contentStyle={{ backgroundColor: "#1e1e20", borderColor: "#444", color: "#fff" }} />
           <Legend />
-          <Line type="monotone" dataKey="blue_team_production_target" stroke="#60a5fa" name="MAS Production" />
-          <Line type="monotone" dataKey="green_team_production_target" stroke="#34d399" name="Human Production" />
+          <Line type="monotone" dataKey="blue_team_production_target" stroke="#a855f7" strokeWidth={3} dot={{ r: 2 }} name="MAS Production" />
+          <Line type="monotone" dataKey="green_team_production_target" stroke="#34d399" strokeWidth={2} dot={{ r: 2 }} name="Human Production" />
         </LineChart>
       </ResponsiveContainer>
     </div>

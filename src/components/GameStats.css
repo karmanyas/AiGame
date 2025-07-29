@@ -1,0 +1,155 @@
+.game-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.stat-item:hover {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: #00ff88;
+  transform: translateX(5px);
+  box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
+}
+
+.stat-item:hover::before {
+  left: 100%;
+}
+
+.stat-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 5px currentColor);
+  animation: float 3s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-label {
+  color: #cccccc;
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+.stat-trend {
+  font-size: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px currentColor;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .game-stats {
+    gap: 12px;
+    padding: 8px;
+  }
+  
+  .stat-item {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .stat-icon {
+    font-size: 1.5rem;
+  }
+  
+  .stat-value {
+    font-size: 1rem;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+  }
+}
+
+/* Scrollbar styling */
+.game-stats::-webkit-scrollbar {
+  width: 6px;
+}
+
+.game-stats::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+.game-stats::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 136, 0.5);
+  border-radius: 3px;
+}
+
+.game-stats::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 136, 0.8);
+}
+
+/* Loading state */
+.game-stats.loading .stat-item {
+  animation: loading-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loading-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Empty state */
+.game-stats:empty::after {
+  content: '📊 No statistics available';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: #666;
+  font-size: 1rem;
+  text-align: center;
+}

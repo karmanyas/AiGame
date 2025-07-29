@@ -1,66 +1,73 @@
-// components/ControlsPanel.tsx
 import { useState } from "react";
 
-interface ControlsProps {
+interface ControlsPanelProps {
   onSubmit: (decisions: {
     price: number;
-    marketingSpend: number;
     productionTarget: number;
+    marketingSpend: number;
   }) => void;
 }
 
-export default function ControlsPanel({ onSubmit }: ControlsProps) {
+export default function ControlsPanel({ onSubmit }: ControlsPanelProps) {
   const [price, setPrice] = useState(10);
-  const [marketingSpend, setMarketingSpend] = useState(0);
-  const [productionTarget, setProductionTarget] = useState(50);
+  const [production, setProduction] = useState(50);
+  const [marketing, setMarketing] = useState(0);
 
   const handleSubmit = () => {
-    onSubmit({ price, marketingSpend, productionTarget });
+    onSubmit({
+      price,
+      productionTarget: production,
+      marketingSpend: marketing,
+    });
   };
 
   return (
-    <div className="bg-[#0f172a] text-white p-6 rounded-2xl shadow-xl space-y-5 border border-green-500">
-      <h2 className="text-xl font-bold text-green-300">🎮 Green Team Controls</h2>
+    <div className="bg-[#0a0f14] p-6 rounded-xl shadow-lg text-white">
+      <h2 className="text-xl font-bold text-green-400 mb-4">🎮 Green Team Controls</h2>
 
-      <div>
-        <label className="block mb-1 text-sm font-medium text-gray-300">💰 Price: ${price.toFixed(2)}</label>
+      {/* Price Slider */}
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">💰 Price: ${price.toFixed(2)}</label>
         <input
           type="range"
-          min="8"
-          max="15"
-          step="0.1"
+          min={1}
+          max={20}
+          step={0.1}
           value={price}
-          onChange={(e) => setPrice(Number(e.target.value))}
-          className="w-full accent-green-500"
+          onChange={(e) => setPrice(parseFloat(e.target.value))}
+          className="w-full accent-green-400"
         />
       </div>
 
-      <div>
-        <label className="block mb-1 text-sm font-medium text-gray-300">🏭 Production Target</label>
+      {/* Production Slider */}
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">🏭 Production Target: {production}</label>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          step={1}
+          value={production}
+          onChange={(e) => setProduction(parseInt(e.target.value))}
+          className="w-full accent-purple-400"
+        />
+      </div>
+
+      {/* Marketing Input */}
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">📢 Marketing Spend</label>
         <input
           type="number"
-          value={productionTarget}
-          onChange={(e) => setProductionTarget(Number(e.target.value))}
-          className="w-full bg-gray-800 border border-gray-600 rounded px-3 py-1 text-white"
+          min={0}
+          value={marketing}
+          onChange={(e) => setMarketing(parseInt(e.target.value))}
+          className="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2"
         />
-      </div>
-
-      <div>
-        <label className="block mb-1 text-sm font-medium text-gray-300">📣 Marketing Spend</label>
-        <select
-          value={marketingSpend}
-          onChange={(e) => setMarketingSpend(Number(e.target.value))}
-          className="w-full bg-gray-800 border border-gray-600 rounded px-3 py-1 text-white"
-        >
-          <option value={0}>$0</option>
-          <option value={500}>$500</option>
-          <option value={2000}>$2000</option>
-        </select>
       </div>
 
       <button
         onClick={handleSubmit}
-        className="bg-green-600 hover:bg-green-700 text-white w-full py-2 mt-2 rounded-xl font-semibold transition"
+        className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded font-semibold transition"
       >
         🚀 End Turn
       </button>

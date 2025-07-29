@@ -1,0 +1,229 @@
+.agent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.agent-item {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  padding: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.agent-item:hover {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: #00ff88;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
+}
+
+.agent-item:hover::before {
+  left: 100%;
+}
+
+.agent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.agent-name {
+  color: #00ff88;
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+}
+
+.agent-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid currentColor;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 5px currentColor;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: scale(1.1);
+  }
+}
+
+.agent-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agent-action {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.action-label {
+  color: #cccccc;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+.action-value {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.performance-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.performance-label {
+  color: #cccccc;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+.performance-track {
+  height: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.performance-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.performance-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .agent-list {
+    gap: 12px;
+    padding: 8px;
+  }
+  
+  .agent-item {
+    padding: 12px;
+  }
+  
+  .agent-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .agent-status {
+    align-self: flex-end;
+  }
+  
+  .agent-name {
+    font-size: 0.9rem;
+  }
+}
+
+/* Scrollbar styling */
+.agent-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.agent-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+.agent-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 136, 0.5);
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+.agent-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 136, 0.8);
+}
+
+/* Empty state */
+.agent-list:empty::after {
+  content: '🤖 No agents available';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: #666;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Loading state */
+.agent-list.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.agent-list.loading .agent-item {
+  animation: loading-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loading-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
