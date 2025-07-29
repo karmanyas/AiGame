@@ -1,3 +1,4 @@
+// components/ProductionChart.tsx
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { GameState } from '../types/GameState';
 
@@ -7,17 +8,17 @@ interface ProductionChartProps {
 
 export default function ProductionChart({ history }: ProductionChartProps) {
   return (
-    <div className="bg-white p-4 rounded shadow mt-4">
-      <h2 className="font-semibold mb-2">Production Targets Over Time</h2>
+    <div className="bg-[#0e0e10] text-white p-6 rounded-2xl shadow-xl border border-purple-600 mt-4">
+      <h2 className="text-lg font-semibold text-purple-400 mb-4">🏭 Production Targets</h2>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={history}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="turn" />
-          <YAxis />
-          <Tooltip />
+          <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+          <XAxis dataKey="turn" stroke="#aaa" />
+          <YAxis stroke="#aaa" />
+          <Tooltip contentStyle={{ backgroundColor: "#1e1e20", borderColor: "#444", color: "#fff" }} />
           <Legend />
-          <Line type="monotone" dataKey="blue_team_production_target" stroke="#8884d8" name="MAS Production" />
-          <Line type="monotone" dataKey="green_team_production_target" stroke="#82ca9d" name="Human Production" />
+          <Line type="monotone" dataKey="blue_team_production_target" stroke="#60a5fa" name="MAS Production" />
+          <Line type="monotone" dataKey="green_team_production_target" stroke="#34d399" name="Human Production" />
         </LineChart>
       </ResponsiveContainer>
     </div>

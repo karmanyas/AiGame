@@ -1,3 +1,4 @@
+// components/ControlsPanel.tsx
 import { useState } from "react";
 
 interface ControlsProps {
@@ -18,46 +19,50 @@ export default function ControlsPanel({ onSubmit }: ControlsProps) {
   };
 
   return (
-    <div className="space-y-4 p-4 bg-green-100 rounded-xl shadow">
-      <h2 className="text-lg font-semibold">Green Team Controls</h2>
-      <label className="block">
-        Price: ${price.toFixed(2)} {/* Display current value */}
+    <div className="bg-[#0f172a] text-white p-6 rounded-2xl shadow-xl space-y-5 border border-green-500">
+      <h2 className="text-xl font-bold text-green-300">🎮 Green Team Controls</h2>
+
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-300">💰 Price: ${price.toFixed(2)}</label>
         <input
-          type="range" // Changed to range slider
-          min="8"      // Minimum price
-          max="15"     // Maximum price
-          step="0.1"   // Step for price adjustment
+          type="range"
+          min="8"
+          max="15"
+          step="0.1"
           value={price}
           onChange={(e) => setPrice(Number(e.target.value))}
-          className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer"
+          className="w-full accent-green-500"
         />
-      </label>
-      <label className="block">
-        Production Target:
+      </div>
+
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-300">🏭 Production Target</label>
         <input
           type="number"
           value={productionTarget}
           onChange={(e) => setProductionTarget(Number(e.target.value))}
-          className="w-full border rounded p-1"
+          className="w-full bg-gray-800 border border-gray-600 rounded px-3 py-1 text-white"
         />
-      </label>
-      <label className="block">
-        Marketing Spend:
+      </div>
+
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-300">📣 Marketing Spend</label>
         <select
           value={marketingSpend}
           onChange={(e) => setMarketingSpend(Number(e.target.value))}
-          className="w-full border rounded p-1"
+          className="w-full bg-gray-800 border border-gray-600 rounded px-3 py-1 text-white"
         >
           <option value={0}>$0</option>
           <option value={500}>$500</option>
           <option value={2000}>$2000</option>
         </select>
-      </label>
+      </div>
+
       <button
         onClick={handleSubmit}
-        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        className="bg-green-600 hover:bg-green-700 text-white w-full py-2 mt-2 rounded-xl font-semibold transition"
       >
-        End Turn
+        🚀 End Turn
       </button>
     </div>
   );
